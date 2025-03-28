@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+dist/
+
+# Vite
+.vite/
+.vitepress/
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log*
+lerna-debug.log*
+
+# Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Mac system files
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Output files
+*.out
+*.log
+
+# Dependency locks
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build artifacts
+build/
+out/
+coverage/
