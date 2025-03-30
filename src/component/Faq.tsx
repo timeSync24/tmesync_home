@@ -1,134 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Collapse, CollapseProps } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const Faq = () => {
+  const [faqData, setFaqData] = useState([]);
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const res = await axios.get(
+          "https://timesync-backend.onrender.com/timesync/v1/getAllFaqs"
+        );
+        setFaqData(res?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchFaqs();
+  }, []);
   const onChange = (key: string | string[]) => {
     console.log(key);
   };
 
-  const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
-  const items: CollapseProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans ",
-          }}
-          className="font-[400] text-[18px] text-[#000000] bg-[#F2F2F2]"
-        >
-          Question text goes here
-        </p>
-      ),
-      children: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans ",
-          }}
-          className="font-[400] text-[14px] text-[#2A323F] bg-[#F2F2F2]"
-        >
-          {text}
-        </p>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans ",
-          }}
-          className="font-[400] text-[18px] text-[#000000] mt-1"
-        >
-          Question text goes here
-        </p>
-      ),
-      children: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans",
-          }}
-          className="font-[400] text-[14px] text-[#2A323F]"
-        >
-          {text}
-        </p>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans ",
-          }}
-          className="font-[400] text-[18px] text-[#000000]"
-        >
-          Question text goes here
-        </p>
-      ),
-      children: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans",
-          }}
-          className="font-[400] text-[14px] text-[#2A323F]"
-        >
-          {text}
-        </p>
-      ),
-    },
-    {
-      key: "4",
-      label: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans ",
-          }}
-          className="font-[400] text-[18px] text-[#000000]"
-        >
-          Question text goes here
-        </p>
-      ),
-      children: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans",
-          }}
-          className="font-[400] text-[14px] text-[#2A323F]"
-        >
-          {text}
-        </p>
-      ),
-    },
-    {
-      key: "5",
-      label: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans ",
-          }}
-          className="font-[400] text-[18px] text-[#000000]"
-        >
-          Question text goes here
-        </p>
-      ),
-      children: (
-        <p
-          style={{
-            fontFamily: "Plus Jakarta Sans",
-          }}
-          className="font-[400] text-[14px] text-[#2A323F]"
-        >
-          {text}
-        </p>
-      ),
-    },
-  ];
+  const items: CollapseProps["items"] = faqData.map((faq: any, index) => ({
+    key: String(index + 1),
+    label: (
+      <p
+        style={{ fontFamily: "Plus Jakarta Sans" }}
+        className="font-[400] text-[18px] text-[#000000]"
+      >
+        {faq.question}
+      </p>
+    ),
+    children: (
+      <p
+        style={{ fontFamily: "Plus Jakarta Sans" }}
+        className="font-[400] text-[14px] text-[#2A323F]"
+      >
+        {faq.answer}
+      </p>
+    ),
+  }));
   return (
     <div className="h-auto">
       <div className="flex flex-col justify-center items-center p-10">
@@ -144,8 +58,7 @@ const Faq = () => {
             fontFamily: "Plus Jakarta Sans",
           }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique.
+          HR & Workforce FAQs: Everything You Need to Know
         </h3>
       </div>
       <div className="w-2/3 flex justify-center items-center mx-auto">
