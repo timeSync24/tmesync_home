@@ -51,7 +51,7 @@ const ReferenceForm = () => {
           {
             onSettled: () => {
               setIsSubmitting(false);
-              nav("/");
+              nav("/reference-success");
             },
           }
         );

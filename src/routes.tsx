@@ -1,5 +1,6 @@
 import Home from "./page/Home";
 import Reference from "./page/Reference";
+import ReferenceSuccess from "./page/ReferenceSuccess";
 
 export const appRoutes = [
   {
@@ -10,6 +11,11 @@ export const appRoutes = [
   {
     path: "/fill-reference",
     component: Reference,
+    requiresAuth: false,
+  },
+  {
+    path: "/reference-success",
+    component: ReferenceSuccess,
     requiresAuth: false,
   },
 
