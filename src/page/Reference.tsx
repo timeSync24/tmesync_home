@@ -45,7 +45,6 @@ const ReferenceForm = () => {
           refereeSignature: uploadedUrl,
           reEmploy: data?.reEmploy?.value,
         };
-
         addForm.mutate(
           { data: payload, token },
           {
